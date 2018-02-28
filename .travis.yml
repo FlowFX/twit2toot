@@ -7,5 +7,5 @@ python:
 install: "make"
 script:
   # Create empty secrets file. Its contents are not used by the test suite.
-  - echo "{}" > secrets.json
+  - cp .travis/secrets.json.sample secrets.json
   - make test
