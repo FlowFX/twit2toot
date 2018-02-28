@@ -6,4 +6,6 @@ python:
   - "3.7-dev"
 install: "make"
 script:
+  # Create empty secrets file. Its contents are not used by the test suite.
+  - echo "{}" > secrets.json
   - make test
