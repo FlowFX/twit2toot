@@ -5,8 +5,6 @@ python:
   - "3.6"
 install: "make"
 script:
-  # Create empty secrets file. Its contents are not used by the test suite.
-  - cp .travis/secrets.json.sample secrets.json
   - make test
 after_success:
   - codecov
