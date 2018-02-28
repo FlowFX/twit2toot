@@ -1,3 +1,4 @@
+"""Main functionality of the twit2toot package."""
 import json
 
 import tweepy
