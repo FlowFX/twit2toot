@@ -1,0 +1,6 @@
+[run]
+source = twit2toot
+branch = True
+omit =
+	# omit all tests
+	tests/*

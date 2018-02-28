@@ -7,7 +7,7 @@ import tweepy
 try:
     with open('secrets.json') as f:
         secrets = json.loads(f.read())
-except FileNotFoundError:
+except FileNotFoundError:  # pragma: no cover
     error_msg = 'secrets.json file is missing.'
     raise FileNotFoundError(error_msg)
 
