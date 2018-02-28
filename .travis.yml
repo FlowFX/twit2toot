@@ -3,7 +3,6 @@ cache: pip
 python:
   - "3.5"
   - "3.6"
-  - "3.7-dev"
 install: "make"
 script:
   # Create empty secrets file. Its contents are not used by the test suite.
