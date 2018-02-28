@@ -102,3 +102,6 @@ ENV/
 
 # twit2toot
 secrets.json
+
+# VS Code
+.vscode/
