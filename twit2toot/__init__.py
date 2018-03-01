@@ -15,16 +15,18 @@ except FileNotFoundError:  # pragma: no cover
 
 
 # Twitter API instance
-auth = tweepy.OAuthHandler(
-    secrets['twitter']['consumer_key'],
-    secrets['twitter']['consumer_secret'],
-    )
-auth.set_access_token(
-    secrets['twitter']['access_token'],
-    secrets['twitter']['access_token_secret'],
-    )
+def get_twitter():
+    """Return a Twitter API instance."""
+    auth = tweepy.OAuthHandler(
+        secrets['twitter']['consumer_key'],
+        secrets['twitter']['consumer_secret'],
+        )
+    auth.set_access_token(
+        secrets['twitter']['access_token'],
+        secrets['twitter']['access_token_secret'],
+        )
 
-api = tweepy.API(auth)
+    return tweepy.API(auth)
 
 
 # Mastodon API instance
