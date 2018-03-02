@@ -3,19 +3,20 @@ from unittest.mock import patch
 
 import pytest
 
-from twit2toot import api
-
 from tweepy.models import Status
 
+from twit2toot import get_twitter
 
-class TestUserTimeline:
+
+class TestUserTimeline:  # noqa: D101
 
     @pytest.mark.skip(reason="This hits the Twitter API.")
     def test_get_user_timeline(self):
         """Exploratory test to get started with using tweepy."""
         # GIVEN any state
         # WHEN using the tweepy to get the user timeline from Twitter
-        response = api.user_timeline(count=5)
+        twitter = get_twitter()
+        response = twitter.user_timeline(count=5)
 
         # THEN it's a list of the correct length
         assert isinstance(response, list)
@@ -27,7 +28,7 @@ class TestUserTimeline:
 
     @patch('tweepy.binder.requests.Session.request')
     def test_get_user_timeline_while_mocking_the_api_response(self, mock_response):
-        """Test correct usage of tweepy
+        """Test correct usage of tweepy.
 
         Mocking the GET request to the Twitter API.
         """
@@ -39,7 +40,8 @@ class TestUserTimeline:
 
         # GIVEN any state
         # WHEN using the tweepy to get the user timeline from Twitter
-        response = api.user_timeline()
+        twitter = get_twitter()
+        response = twitter.user_timeline()
 
         # THEN it's a list
         assert isinstance(response, list)
