@@ -7,3 +7,10 @@ A Twitter to Mastodon bridge aiming to create "natural" sounding and looking Too
 - Clean URLs, removing Twitter's `t.co` crap.
 - Rewritten @mentions from the Twitter handle to e.g. `@Cheatha@twitter.com`.
 - Native media files, requiring for images to be re-uploaded to the Mastodon instance.
+
+
+## Usage
+
+```bash
+$ python toot.py
+```

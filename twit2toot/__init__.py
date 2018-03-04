@@ -51,9 +51,3 @@ def toot_latest_tweet():
     response = mastodon.toot(tweet.text)
 
     return response
-
-
-if __name__ == "__main__":
-    """When called from the command line, then toot the latest tweet."""
-    response = toot_latest_tweet()
-    print(response)

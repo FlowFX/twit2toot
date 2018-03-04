@@ -9,6 +9,7 @@ name = "pypi"
 
 tweepy = "*"
 "mastodon.py" = "*"
+click = "*"
 
 
 [dev-packages]
