@@ -40,3 +40,20 @@ def get_mastodon():
     )
 
     return mastodon
+
+
+def toot_latest_tweet():
+    """Get the latest tweet from Twitter and toot it to Mastodon."""
+    twitter = get_twitter()
+    mastodon = get_mastodon()
+
+    tweet = twitter.user_timeline(count=1)[0]
+    response = mastodon.toot(tweet.text)
+
+    return response
+
+
+if __name__ == "__main__":
+    """When called from the command line, then toot the latest tweet."""
+    response = toot_latest_tweet()
+    print(response)
