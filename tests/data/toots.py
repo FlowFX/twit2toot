@@ -25,7 +25,7 @@ TOOT_SIMPLE = {
     'reblog': None,
     'application': {
         'name': 'twit2toot',
-        'website': 'https://github.com/FlowFX/twit2toot'
+        'website': 'https://github.com/FlowFX/twit2toot',
         },
     'account': {
         'id': 44841,

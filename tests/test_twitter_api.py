@@ -1,5 +1,5 @@
 """Testing our usage of the Twitter API using tweepy."""
-from unittest.mock import patch
+from mock import patch
 
 import pytest
 
