@@ -1,5 +1,5 @@
 """Test writing to the Mastodon API."""
-from unittest.mock import patch
+from mock import patch
 
 import pytest
 
