@@ -8,4 +8,4 @@ def test_can_read_tweets_from_sample_file(sample_tweets):  # noqa: D103
 
     # THEN we get a list of tweets as Status objects
     assert len(tweets) > 1
-    assert isinstance(tweets[0], Status)
+    assert isinstance(tweets[-1], Status)
