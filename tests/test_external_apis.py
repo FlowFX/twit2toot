@@ -10,7 +10,7 @@ from twit2toot import get_mastodon, get_twitter
 
 class TestUserTimeline:  # noqa: D101
 
-    @pytest.mark.skip(reason="This hits the Twitter API.")
+    @pytest.mark.api
     def test_get_user_timeline(self):
         """Exploratory test to get started with using tweepy."""
         # GIVEN any state
@@ -52,7 +52,7 @@ class TestUserTimeline:  # noqa: D101
 
 class TestWritingToMastodon:  # noqa: D101
 
-    @pytest.mark.skip(reason="This hits the Mastodon API.")
+    @pytest.mark.api
     def test_can_send_toot(self):
         """Exploratory test to get used to the Mastodon.py wrapper."""
         # GIVEN a mastodon API instance
@@ -89,7 +89,7 @@ class TestWritingToMastodon:  # noqa: D101
 
 class TestTwitter2MastodonBridge:  # noqa: D101
 
-    @pytest.mark.skip(reason="This hits the Twitter and Mastodon APIs.")
+    @pytest.mark.api
     def test_bridge_latest_tweet_to_mastodon(self):
         """Test that we can copy a Tweet to a Toot.
 

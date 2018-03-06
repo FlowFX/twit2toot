@@ -3,15 +3,14 @@ import re
 from html import escape
 
 
-re_newlines = re.compile(r'\r\n|\r') # Used in normalize_newlines
-
-
 def normalize_newlines(text):
     """Normalize CRLF and CR newlines to just LF.
 
     Copied from the Django source code.
     https://github.com/django/django/blob/master/django/utils/text.py#L261
     """
+    re_newlines = re.compile(r'\r\n|\r')
+
     return re_newlines.sub('\n', str(text))
 
 
