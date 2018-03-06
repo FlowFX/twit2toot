@@ -66,6 +66,8 @@ class TestWritingToMastodon:  # noqa: D101
         assert isinstance(response.id, int)
         assert text in response['content']
 
+        mastodon.status_delete(response['id'])
+
     @patch('twit2toot.Mastodon.toot')
     def test_can_send_toot_with_mock(self, mock_response):
         """Test correct usage of Mastodon.py.
@@ -106,7 +108,9 @@ class TestTwitter2MastodonBridge:  # noqa: D101
 
         # THEN it works and returns the toot id
         assert isinstance(response.id, int)
-        assert text[-20:] in response['content']
+        # assert text[-20:] in response['content']
+
+        mastodon.status_delete(response['id'])
 
     def test_bridge_latest_tweet_to_mastodon_using_mocks(self):
         """Test that we can copy a Tweet to a Toot.
