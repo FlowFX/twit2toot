@@ -51,3 +51,12 @@ def toot_latest_tweet():
     response = mastodon.toot(tweet.text)
 
     return response
+
+
+def crosspost_to_mastodon(tweet, mastodon):
+    """Crosspost to Mastodon using a given instance and tweet."""
+    response = mastodon.status_post(
+        status=tweet.text,
+    )
+
+    return response

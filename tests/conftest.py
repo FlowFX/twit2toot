@@ -3,7 +3,13 @@ from mock import patch
 
 import pytest
 
-from twit2toot import get_twitter
+from twit2toot import get_mastodon, get_twitter
+
+
+@pytest.fixture()
+def mastodon():
+    """Return a Mastodon API instance."""
+    return get_mastodon()
 
 
 @pytest.fixture(scope="session")
