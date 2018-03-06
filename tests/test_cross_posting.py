@@ -4,6 +4,11 @@ from tweepy.models import Status
 from twit2toot import crosspost_to_mastodon
 from twit2toot.utils import linebreaks
 
+import re
+
+# t.co/ links
+t_co = re.compile(r'.*t\.co/.*')
+
 
 def test_can_read_tweets_from_sample_file(sample_tweets):  # noqa: D103
     # GIVEN a list of tweets
@@ -16,6 +21,9 @@ def test_can_read_tweets_from_sample_file(sample_tweets):  # noqa: D103
 
 def test_can_toot_a_simple_tweet(mastodon, sample_tweets):  # noqa: D103
     # GIVEN a simple tweet that only contains text
+    #
+    # "Hallo, ich bin ein linksversiffter Gutmensch und wenn du das als
+    # Beleidigung zu mir sagst, bist du wohl ein braunverkackter Schlechtmensch."
     tweet = sample_tweets[0]
 
     assert not tweet.retweeted
@@ -38,6 +46,58 @@ def test_can_toot_a_simple_tweet(mastodon, sample_tweets):  # noqa: D103
 
     assert not response['in_reply_to_id']
     assert not response['reblogged']
+
+
+def test_can_toot_a_tweet_with_one_link(mastodon, sample_tweets):  # noqa: D103
+    # GIVEN a tweet that only contains text and one link
+    #
+    # "Please: Forget your EV or other certs and just run Let’s Encrypt.
+    # Thanks! https://t.co/7NkDnQRYdq"
+    tweet = sample_tweets[1]
+
+    assert not tweet.in_reply_to_user_id
+    assert not tweet.in_reply_to_status_id
+
+    assert tweet.entities['hashtags'] == []
+    assert tweet.entities['symbols'] == []
+    assert tweet.entities['user_mentions'] == []
+    assert len(tweet.entities['urls']) == 1
+
+    link = tweet.entities['urls'][0]
+    assert link['url'].startswith('https://t.co/')
+    print(link)
+
+    # WHEN cross-posting this tweet to Mastodon
+    response = crosspost_to_mastodon(tweet, mastodon)
+
+<<<<<<< HEAD
+    # THEN the response shows a clean URL
+    # TODO: create a regular expression that searches the content for t.co urls
+    assert 't.co' not in response['content']
+    # assert type(response['id']) == int
+||||||| parent of 38319a0... Add failing test for tweet with link
+    # THEN the response shows a clean URL
+    # TODO: create a regular expression that searches the content for t.co urls
+    # assert 't.co' not in response['content']
+    # assert type(response['id']) == int
+=======
+    # THEN the response content shows a clean URL
+    assert not t_co.match(response['content'])
+>>>>>>> 38319a0... Add failing test for tweet with link
+
+    # assert response['content'] == linebreaks(tweet.text)
+    # assert response['tags'] == []
+
+    # assert not response['in_reply_to_id']
+    # assert not response['reblogged']
+<<<<<<< HEAD
+    import pytest
+    pytest.fail("Finish the test!")
+||||||| parent of 38319a0... Add failing test for tweet with link
+    # import pytest
+    # pytest.fail("Finish the test!")
+=======
+>>>>>>> 38319a0... Add failing test for tweet with link
 
 # Mastodon.status_post(
 #     status,
