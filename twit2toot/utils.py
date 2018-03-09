@@ -46,6 +46,9 @@ def process_tweet(tweet):
 
     urls = tweet.entities.get('urls')
 
+    if tweet.text.startswith('RT @'):
+        return False
+
     try:
         # first URL
         url = urls[0]
