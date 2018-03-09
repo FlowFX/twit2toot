@@ -1,22 +1,37 @@
 """Test utility functions."""
-import datetime
+import re
 
-from tweepy.models import Status, User
+from twit2toot.factories import StatusFactory
+from twit2toot.utils import process_tweet
 
-from twit2toot.factories import UserFactory, StatusFactory
+
+# t.co/ links
+t_co = re.compile(r'.*t\.co/.*')
 
 
-def test_can_create_sample_tweet():  # noqa: D103
-    user = UserFactory.build()
+class TestProcessing:
+    """Test twit2toot.utils.process_tweet."""
 
-    tweet = StatusFactory.build()
-    # tweet = Status()
+    def test_tweet_with_link(self):  # noqa: D102
+        # GIVEN a simple tweet with one linked URL.
+        tweet = StatusFactory.build(
+            text='Just run Let’s Encrypt. https://t.co/7NkDnQRYdq',
+            entities={
+                'urls': [
+                    {
+                        "url": "https://t.co/7NkDnQRYdq",
+                        "expanded_url": "http://blog.koehntopp.info/index.php/3075-how-not-to-run-a-ca/",
+                        "display_url": "blog.koehntopp.info/index.php/3075…",
+                    },
+                ],
+            },
+        )
 
-    print(tweet)
+        # WHEN processing the tweet
+        toot_dict = process_tweet(tweet)
+        text = toot_dict['status']
 
-    assert isinstance(tweet, Status)
-    assert isinstance(tweet.id, int)
-    assert isinstance(tweet.author, User)
-
-    import pytest
-    pytest.fail("Finish the test!")
+        # THEN the content shows a clean URL
+        # http://blog.koehntopp.info/index.php/3075-how-not-to-run-a-ca/
+        assert not t_co.match(text)
+        assert 'http://blog.koehntopp.info/index.php/3075-how-not-to-run-a-ca/' in text

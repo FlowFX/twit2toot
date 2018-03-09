@@ -49,4 +49,4 @@ class StatusFactory(factory.Factory):
     }
     in_reply_to_status_id = False
     in_reply_to_user_id = False
-    # is_quote_status = False
+# is_quote_status = False

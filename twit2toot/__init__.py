@@ -5,6 +5,8 @@ from mastodon import Mastodon
 
 import tweepy
 
+from .utils import process_tweet
+
 
 try:
     with open('secrets.json') as f:
@@ -55,8 +57,10 @@ def toot_latest_tweet():
 
 def crosspost_to_mastodon(tweet, mastodon):
     """Crosspost to Mastodon using a given instance and tweet."""
+    toot_dict = process_tweet(tweet)
+
     response = mastodon.status_post(
-        status=tweet.text,
+        status=toot_dict['status'],
     )
 
     return response
