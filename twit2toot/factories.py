@@ -49,7 +49,7 @@ class StatusFactory(factory.Factory):
     created_at = datetime.datetime(2015, 8, 4, 7, 35, 41)
     author = factory.SubFactory(UserFactory)
     text = 'Hallo. Ich bin ein Tweet.'
-    entities: dict = {
+    entities = {
         'hashtags': [],
         'symbols': [],
         'user_mentions': [],
