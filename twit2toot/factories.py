@@ -7,12 +7,16 @@ from tweepy import models
 
 
 class User(models.User):
+    """User model from tweepy, altered for test usage."""
+
     def __init__(self, api=None, id=None):
         # super(User, self).__init__()
         self.id = id
 
 
 class Status(models.Status):
+    """Status model from tweepy, altered for test usage."""
+
     def __init__(self, id=None, created_at=None, author=None, text='', entities=[],
                  in_reply_to_status_id=False, in_reply_to_user_id=False):
         super(Status, self).__init__()
@@ -27,6 +31,8 @@ class Status(models.Status):
 
 
 class UserFactory(factory.Factory):
+    """Model factory for tweepy.models.User."""
+
     class Meta:
         model = User
 
@@ -34,6 +40,8 @@ class UserFactory(factory.Factory):
 
 
 class StatusFactory(factory.Factory):
+    """Model factory for tweepy.models.Status."""
+
     class Meta:
         model = Status
 
