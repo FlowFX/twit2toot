@@ -35,3 +35,15 @@ class TestProcessing:
         # http://blog.koehntopp.info/index.php/3075-how-not-to-run-a-ca/
         assert not t_co.match(text)
         assert 'http://blog.koehntopp.info/index.php/3075-how-not-to-run-a-ca/' in text
+
+    def test_retweet(self):  # noqa: D102
+        # GIVEN a retweet
+        tweet = StatusFactory.build(
+            text='RT @matthiasfromm: Yes, podcast hosting',
+        )
+
+        # WHEN processing the tweet
+        toot_dict = process_tweet(tweet)
+
+        # THEN the result is false
+        assert toot_dict is False
